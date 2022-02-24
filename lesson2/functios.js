@@ -18,23 +18,15 @@ function createCounter(){
 
 function spinWords(string){
     let array=string.split(' ');
-    let flag=false;
+    let wordsArray=[];
     array.forEach(function(word){
         if(word.length>=5){
-            flag=true;
-        }
-    });
-    if(flag){
-        let returnArray=[];
-        array.forEach(function(word){
             let letters=word.split('');
             letters.reverse();
             let newWord= letters.join('');
-            returnArray.push(newWord);
-        });
-        return returnArray.join(' ');
-    }
-    else{
-        return string;
-    }
+            wordsArray.push(newWord)
+        }
+        else wordsArray.push(word)
+    });
+    return wordsArray.join(' ');
 }
