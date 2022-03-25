@@ -1,5 +1,4 @@
-import Catalog from "./components/catalog.js";
-
+import PostItem from "./components/postItem.js";
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init)
@@ -8,5 +7,5 @@ if (document.readyState === 'loading') {
 }
 
 function init() {
-    new Catalog(document.getElementById('posts'))
+    new PostItem(document.getElementById('post'))
 }

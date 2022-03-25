@@ -7,7 +7,6 @@ export default class Catalog {
         this.limit = 12
         this.count = null
         this.pageCount = null
-
         this.getItems()
         this.initListeners()
     }
@@ -28,6 +27,7 @@ export default class Catalog {
             this.getItems()
 
             const {origin, pathname} = document.location
+            console.log(document.location)
             const url = origin + pathname + `?page=${page}`
 
             history.pushState({}, '', url)
@@ -36,6 +36,7 @@ export default class Catalog {
 
     getPage() {
         const url = new URL(window.location.href)
+        console.log(url)
 
         return +url.searchParams.get('page') || 1
     }
@@ -44,24 +45,21 @@ export default class Catalog {
         this.pageCount = Math.floor(this.count / this.limit)
     }
 
-    getItems() {
+     async getItems() {
         const url = `https://jsonplaceholder.typicode.com/posts?_limit=${this.limit}&_page=${this.page}`
 
-        fetch(url)
-        .then(res => {
-            this.count = res.headers.get('x-total-count')
-            this.getPageCount()
-            return res.json()
-        })
-        .then(data => {
-            this.renderItems(data)
-            this.renderPagination()
-        })
+        const a= await fetch(url)
+        const aJson= await a.json()
+        this.count = a.headers.get('x-total-count')
+        this.getPageCount()
+        this.renderItems(aJson)
+        this.renderPagination()
+         return aJson
     }
 
     renderItems(items) {
         let html = ''
-
+        console.log(items)
         items.forEach(item => {
             html += `
             <div class="post-item">
