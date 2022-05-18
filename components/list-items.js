@@ -2,7 +2,7 @@ export default class ListItems {
 	constructor(el, data) {
 		this.el = el;
 		this.data = data;
-		this.render();
+		//this.render();
 		this.init();
 	}
 
