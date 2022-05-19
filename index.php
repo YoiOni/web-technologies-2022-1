@@ -6,114 +6,129 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>No Drugs only Друг</title>
-    <link href="style.css" rel="stylesheet">
-    <script src="index.js" type="module" r></script>
 </head>
 <body>
 <?php
-function getTree(){
-    $conn=mysqli_connect("vyvern.com", "root", "", "lesson8");
-    $query = "SELECT* from menu";
-    $result= mysqli_query($conn, $query);
-    $tree = [];
-    foreach ($result as $row){
-        $tree[$row['id']]['parent']=$row['parent_id'];
-        $tree[$row['id']]['title']=$row['tittle'];
-        $tree[$row['id']]['childrens']=[];
-        if(is_null($row['parent_id'])) continue;
-        $tree[$row['parent_id']]['childrens'][$row['id']]=$row['id'];
-    }
-    mysqli_close($conn);
-    return $tree;
-}
-$tree=getTree();
-echo ('<div class="list-items" id="list-items">');
-foreach ($tree as $root){
-    if($root['parent']==""){
-        render_menu($tree,$root);
-    }
-}
-echo ('</div>');
+//Задание 1
+$a = $_GET['a'];
+$b = $_GET['b'];
+//if($a>=0 & $b>=0) echo $a-$b;
+//else
+//    if($a<0 & $b<0) echo $a*$b;
+//    else echo $a+$b;
 
-function render_menu($tree, $root){
-    if(count($root['childrens'])!=0){
-        $div_head ="<div class=\"list-item \" data-parent>\n".
-            "<div class=\"list-item__inner\">\n".
-            "<img class=\"list-item__arrow\" src=\"./assets/img/chevron-down.png\" alt=\"chevron-down\" data-open>\n".
-            "<img class=\"list-item__folder\" src=\"./assets/img/folder.png\" alt=\"folder\">\n".
-            "<span>".$root['title']."</span>\n".
-            "</div>\n".
-            "<div class=\"list-item__items\">";
-        echo($div_head);
-        foreach ($root['childrens'] as $children){
-            render_menu($tree,$tree[$children]);
-        }
-        echo('</div> </div>');
-    }
-    else{
-        echo("<div class=\"list-item__inner\">\n".
-            "<img class=\"list-item__folder\" src=\"./assets/img/folder.png\" alt=\"folder\">\n".
-            "<span>".$root['title']."</span>\n".
-            "</div>");
-    }
+//Задание 2
+//$a = mt_rand(0,15);
+//for ($i=$a;$i<=15;$i++)
+//    echo $i."
 
-}
 
-//$div_head ="<div class=\"list-item \" data-parent>\n".
-//    "<div class=\"list-item__inner\">\n".
-//    "<img class=\"list-item__arrow\" src=\"./assets/img/chevron-down.png\" alt=\"chevron-down\" data-open>\n".
-//    "<img class=\"list-item__folder\" src=\"./assets/img/folder.png\" alt=\"folder\">\n".
-//    "<span>".$titles[$key]."</span>\n".
-//    "</div>\n".
-//    "<div class=\"list-item__items\">";
-//echo($div_head);
-//render_menu($value,$titles);
-//echo('</div>');
+//Задание 3
+//function  mathOperation($arg1, $arg2, $operation){
+//    switch ($operation){
+//        case "+": return $arg1 + $arg2;
+//        case "-": return $arg1 - $arg2;
+//        case "*": return $arg1 * $arg2;
+//        case "/": return $arg1 / $arg2;
+//        default: return "Операция не найдена";
+//    }
+//}
+//echo mathOperation($a,$b, "*")
+
+
+//Задание 4
+//echo "Текущий год: ".date("Y")
+
+
+
+//Задание 5
+//function getStringDescriptionFromNumber($num){
+//    if($num == 0) return $num." - это ноль.";
+//    if($num % 2 == 0) return $num." - это четное число.";
+//    else return $num." - это нечетное число.";
+//}
+//$i=0;
+//while($i <= 10){
+//    echo "<div>".getStringDescriptionFromNumber($i)."</div>";
+//    $i++;
+//}
+
+
+//Задание 6
+//$city_dict = [
+//        "Московская область" => ["Москва", "Иваново", "Зеленоград"],
+//        "Тюменская область" => ["Тюмень", "Тобольск", "Ялуторовск"],
+//        "Курганская область" => ["Курган", "Шадринск"]
+//];
+//foreach ($city_dict as $district => $cities){
+//    echo "<div>".$district.":"."<div>";
+//    for ($i=0; $i<count($cities);$i++){
+//        if($i==count($cities)-1) echo $cities[$i].".";
+//        else echo $cities[$i].", ";
+//    }
+//    echo "</div> </div>";
+//}
+
+
+
+////Задание 7
+//$dict = [
+//        'a' => "a",
+//        'б' => "b",
+//        'в' => "v",
+//        'г' => "g",
+//        'д' => "d",
+//        'е' => "e",
+//        'ё' => "yo",
+//        'ж' => "zh",
+//        "з" => "z",
+//        'и' => "i",
+//        'й' => "y",
+//        'к' => "k",
+//        'л' => "l",
+//        'м' => "m",
+//        'н' => "n",
+//        'о' => "o",
+//        'п' => "p",
+//        'р' => "r",
+//        'с' => "s",
+//        'т' => "t",
+//        'у' => "u",
+//        'ф' => "f",
+//        'х' => "h",
+//        'ц' => "c",
+//        'ч' => "ch",
+//        'ш' => "sh",
+//        'щ' => "sch",
+//        'ъ' => "",
+//        'ы' => "y",
+//        'ь' => "",
+//        'э' => "e",
+//        'ю' => "yu",
+//        'я' => "ya",
 //
-//echo("<div class=\"list-item__inner\">\n".
-//    "<img class=\"list-item__folder\" src=\"./assets/img/folder.png\" alt=\"folder\">\n".
-//    "<span>".key($tree)."</span>\n".
-//    "</div>");
+//];
+//echo strtr('здарова отец',$dict)
+
+////Задание 8
+//$menu = [
+//    "Меню1" => ["Подменю1", "Подменю2"=>["Подподдменю1", "Подподдменю2"],"Подменю3"=>["Подподменю3"]],
+//    "Меню2" => ["Подменю4","Подменю5"=>["Подподменю4","Подподменю5"]]
+//];
+//renderMenu($menu);
+//function renderMenu($menuArray){
+//    foreach($menuArray as $menu => $submenu) {
+//        if(is_array($submenu)) {
+//            echo('<li>'.$menu.'</li>');
+//            echo ('<ul>');
+//            renderMenu($submenu);
+//            echo ('</ul>');
+//        } else {
+//            echo('<li>' . $submenu . '</li>');
+//        }
+//
+//    }
+//}
 ?>
-<!--<div class="list-items" id="list-items">-->
-<!--    <div class="list-item list-item_open" data-parent>-->
-<!--        <div class="list-item__inner">-->
-<!--            <img class="list-item__arrow" src="./assets/img/chevron-down.png" alt="chevron-down" data-open>-->
-<!--            <img class="list-item__folder" src="./assets/img/folder.png" alt="folder">-->
-<!--            <span>Каталог товаров</span>-->
-<!--        </div>-->
-<!--        <div class="list-item__items">-->
-<!--            <div class="list-item" data-parent>-->
-<!--                <div class="list-item__inner">-->
-<!--                    <img class="list-item__arrow" src="./assets/img/chevron-down.png" alt="chevron-down" data-open>-->
-<!--                    <img class="list-item__folder" src="./assets/img/folder.png" alt="folder">-->
-<!--                    <span>Мойки</span>-->
-<!--                </div>-->
-<!--                <div class="list-item__items">-->
-<!--                    <div class="list-item"  data-parent>-->
-<!--                        <div class="list-item__inner">-->
-<!--                            <img class="list-item__arrow" src="./assets/img/chevron-down.png" alt="chevron-down" data-open>-->
-<!--                            <img class="list-item__folder" src="./assets/img/folder.png" alt="folder">-->
-<!--                            <span>Мойка 1</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="list-item__items">-->
-<!---->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="list-item__items">-->
-<!--            <div class="list-item" data-parent>-->
-<!--                <div class="list-item__inner">-->
-<!--                    <img class="list-item__arrow" src="./assets/img/chevron-down.png" alt="chevron-down" data-open>-->
-<!--                    <img class="list-item__folder" src="./assets/img/folder.png" alt="folder">-->
-<!--                    <span>Фильтры</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="list-item__items"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 </body>
 </html>
