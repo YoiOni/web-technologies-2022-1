@@ -1,5 +1,6 @@
 <?php
 include_once 'model/products.php';
+include_once 'model/comments.php';
 
 $id = $_GET['id'];
 
@@ -29,7 +30,12 @@ $product = productById($id)[0];
         <div>
             Цена: <?=$product['price']?>
         </div>
-        <img src="<?=$product['image']?>" alt="" height="200px" style="object-fit: cover;width: fit-content">
+        <img src="<?='/images/'.$product['image']?>" alt="" height="200px" style="object-fit: cover;width: fit-content">
+        <FORM name = "comment_module" action="/model/comments.php" method="post" style="object-fit: cover;width: 300px; align-items: center; border: solid black">
+            <input type="text">
+            <button value="<?=$product['id']?>" type = "submit"> Добавить </button>
+        </FORM>
+
     </div>
 <!--    -->
 <!--<form>-->

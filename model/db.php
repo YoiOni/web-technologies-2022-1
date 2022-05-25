@@ -3,7 +3,7 @@
 		static $db;
 		
 		if($db === null){
-			$db = new PDO('mysql:host=localhost;dbname=test-db', 'root', '', [
+			$db = new PDO('mysql:host=vyvern.com;dbname=lesson11', 'root', '', [
 				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 			]);
 			

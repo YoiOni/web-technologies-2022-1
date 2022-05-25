@@ -23,7 +23,7 @@ $products = productsAll();
             <div>
                 Цена: <?=$product['price']?>
             </div>
-            <img src="<?=$product['image']?>" alt="" height="200px" style="object-fit: cover">
+            <img src="<?='/images/'.$product['image']?>" alt="" height="200px" style="object-fit: cover">
         </a>
     <?endforeach;?>
 </div>
