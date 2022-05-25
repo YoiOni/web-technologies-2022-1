@@ -128,6 +128,8 @@ export class Auth {
             const todo = resultValue.data
 
             this.renderToDo(todo)
+            this.initEventListener()
+
         }
     }
 
@@ -149,7 +151,7 @@ export class Auth {
 
     async changeCheckBox(id,checkbox){
         const completed = document.querySelector(`#todo${id} input`).checked;
-
+        console.log(completed)
         const result = await fetch(`http://localhost:5000/api/todo/${id}`, {
             method: 'PUT',
             body: JSON.stringify({completed: completed}),
@@ -165,12 +167,13 @@ export class Auth {
             const todo = document.getElementById(`todo${id}`);
             todo.classList.toggle('completed')
             checkbox.checked = !completed
+
         }
-        console.log(checkbox.checked)
+        //console.log(checkbox.checked)
     }
 
     renderAllToDos(list){
-        console.log(list)
+        //console.log(list)
         list.forEach(toDo=>this.renderToDo(toDo));
         this.initEventListener()
     }
@@ -179,7 +182,7 @@ export class Auth {
         let toDoPlace= document.getElementById("toDo-List")
         console.log(toDo)
         toDoPlace.insertAdjacentHTML('beforeend',`<div class="toDo" id="todo${toDo.id}">
-                <input type="checkbox" id="${toDo.id}" data-check/>
+                <input type="checkbox" id="${toDo.id}" data-check ${toDo.completed && 'checked'}/>
                 <span>${toDo.description}</span>
                 <button id="${toDo.id}" data-delete>❌</button>
             </div>`)
@@ -189,7 +192,7 @@ export class Auth {
         const todosButtons = document.querySelectorAll('[data-delete]');
         todosButtons.forEach(button => button.addEventListener('click', async (e) => {
             const id = +e.path[0].id
-            console.log(e)
+            //console.log(e)
 
             await this.deleteToDo(id);
         }))
@@ -198,9 +201,10 @@ export class Auth {
 
         todosCheckboxes.forEach(checkbox => checkbox.addEventListener('change', async (e) => {
             const id = +e.path[0].id
-            checkbox.checked = !e.target.checked
 
             await this.changeCheckBox(id, checkbox)
+
+            checkbox.checked = !e.target.checked
         }))
     }
 }

@@ -30,7 +30,7 @@ function init() {
             fields.forEach(field => {
                 obj[field.name] = field.input.value
             })
-            console.log(obj)
+            //console.log(obj)
             await new Auth().addToDo(obj)
         }
     ).init()
